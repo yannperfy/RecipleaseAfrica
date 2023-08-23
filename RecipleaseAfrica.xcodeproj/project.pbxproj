@@ -19,6 +19,9 @@
 		268F7B9C2A919CBC001BB502 /* RecipleaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268F7B9B2A919CBC001BB502 /* RecipleaseListViewController.swift */; };
 		268F7B9F2A91AB46001BB502 /* RecipleaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268F7B9D2A91AB46001BB502 /* RecipleaseTableViewCell.swift */; };
 		268F7BA02A91AB46001BB502 /* RecipleaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268F7B9E2A91AB46001BB502 /* RecipleaseTableViewCell.xib */; };
+		268F7BA22A953393001BB502 /* FavoriteListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268F7BA12A953393001BB502 /* FavoriteListTableViewController.swift */; };
+		268F7BA82A95764B001BB502 /* Reciplease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268F7BA72A95764B001BB502 /* Reciplease.swift */; };
+		268F7BAA2A95771B001BB502 /* RecipleaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268F7BA92A95771B001BB502 /* RecipleaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		268F7B9B2A919CBC001BB502 /* RecipleaseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseListViewController.swift; sourceTree = "<group>"; };
 		268F7B9D2A91AB46001BB502 /* RecipleaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseTableViewCell.swift; sourceTree = "<group>"; };
 		268F7B9E2A91AB46001BB502 /* RecipleaseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipleaseTableViewCell.xib; sourceTree = "<group>"; };
+		268F7BA12A953393001BB502 /* FavoriteListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListTableViewController.swift; sourceTree = "<group>"; };
+		268F7BA72A95764B001BB502 /* Reciplease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease.swift; sourceTree = "<group>"; };
+		268F7BA92A95771B001BB502 /* RecipleaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,16 +111,10 @@
 		265B83792A8F19610081E460 /* RecipleaseAfrica */ = {
 			isa = PBXGroup;
 			children = (
-				265B837A2A8F19610081E460 /* AppDelegate.swift */,
-				265B837C2A8F19610081E460 /* SceneDelegate.swift */,
-				265B837E2A8F19610081E460 /* RecipleaseViewController.swift */,
-				268F7B9B2A919CBC001BB502 /* RecipleaseListViewController.swift */,
-				268F7B9D2A91AB46001BB502 /* RecipleaseTableViewCell.swift */,
-				268F7B9E2A91AB46001BB502 /* RecipleaseTableViewCell.xib */,
-				265B83802A8F19610081E460 /* Main.storyboard */,
-				265B83832A8F19670081E460 /* Assets.xcassets */,
-				265B83852A8F19670081E460 /* LaunchScreen.storyboard */,
-				265B83882A8F19670081E460 /* Info.plist */,
+				268F7BA62A9575D2001BB502 /* Supporting Files */,
+				268F7BA52A9575B3001BB502 /* Model */,
+				268F7BA32A95755F001BB502 /* Controller */,
+				268F7BA42A957594001BB502 /* View */,
 			);
 			path = RecipleaseAfrica;
 			sourceTree = "<group>";
@@ -134,6 +134,47 @@
 				265B839D2A8F19680081E460 /* RecipleaseAfricaUITestsLaunchTests.swift */,
 			);
 			path = RecipleaseAfricaUITests;
+			sourceTree = "<group>";
+		};
+		268F7BA32A95755F001BB502 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				265B837E2A8F19610081E460 /* RecipleaseViewController.swift */,
+				268F7B9B2A919CBC001BB502 /* RecipleaseListViewController.swift */,
+				268F7BA12A953393001BB502 /* FavoriteListTableViewController.swift */,
+				268F7B9D2A91AB46001BB502 /* RecipleaseTableViewCell.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		268F7BA42A957594001BB502 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				268F7B9E2A91AB46001BB502 /* RecipleaseTableViewCell.xib */,
+				265B83802A8F19610081E460 /* Main.storyboard */,
+				265B83852A8F19670081E460 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		268F7BA52A9575B3001BB502 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				268F7BA72A95764B001BB502 /* Reciplease.swift */,
+				268F7BA92A95771B001BB502 /* RecipleaseService.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		268F7BA62A9575D2001BB502 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				265B837A2A8F19610081E460 /* AppDelegate.swift */,
+				265B837C2A8F19610081E460 /* SceneDelegate.swift */,
+				265B83882A8F19670081E460 /* Info.plist */,
+				265B83832A8F19670081E460 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,9 +309,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				268F7BAA2A95771B001BB502 /* RecipleaseService.swift in Sources */,
 				265B837F2A8F19610081E460 /* RecipleaseViewController.swift in Sources */,
 				268F7B9C2A919CBC001BB502 /* RecipleaseListViewController.swift in Sources */,
 				265B837B2A8F19610081E460 /* AppDelegate.swift in Sources */,
+				268F7BA82A95764B001BB502 /* Reciplease.swift in Sources */,
+				268F7BA22A953393001BB502 /* FavoriteListTableViewController.swift in Sources */,
 				268F7B9F2A91AB46001BB502 /* RecipleaseTableViewCell.swift in Sources */,
 				265B837D2A8F19610081E460 /* SceneDelegate.swift in Sources */,
 			);
@@ -451,7 +495,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZD87C2Z59S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RecipleaseAfrica/Info.plist;
+				INFOPLIST_FILE = "RecipleaseAfrica/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -479,7 +523,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZD87C2Z59S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RecipleaseAfrica/Info.plist;
+				INFOPLIST_FILE = "RecipleaseAfrica/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
