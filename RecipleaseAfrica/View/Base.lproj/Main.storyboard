@@ -214,18 +214,32 @@
                                 <rect key="frame" x="10" y="257" width="373" height="417"/>
                                 <color key="backgroundColor" red="0.1144487015" green="0.1144487015" blue="0.1144487015" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecipleaseCell" rowHeight="60" id="mFX-o8-wJ3">
-                                        <rect key="frame" x="0.0" y="50" width="373" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PresentCell" textLabel="T7p-q8-5qG" rowHeight="70" style="IBUITableViewCellStyleDefault" id="mFX-o8-wJ3" customClass="PresentTableViewCell" customModule="RecipleaseAfrica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="373" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mFX-o8-wJ3" id="65C-5f-YyI">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T7p-q8-5qG">
+                                                    <rect key="frame" x="20" y="0.0" width="333" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.08269381361" green="0.67111403280000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="greenView" destination="65C-5f-YyI" id="3Gd-oX-AFK"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Jt1-GF-hsY"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="dAv-hS-ais"/>
                                 </connections>
                             </tableView>
                         </subviews>

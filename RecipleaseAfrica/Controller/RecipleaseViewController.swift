@@ -26,7 +26,9 @@ class RecipleaseViewController: UIViewController {
         // Utilisez recipeName pour créer une nouvelle instance de Reciplease
             let reciplease = Reciplease(ingr: recipeName)
 
-            RecipleaseService.shared.add(reciplease: reciplease)
+            PresentService.shared.add(present: reciplease)
+        
+        tableView.reloadData()
     }
     
     
@@ -37,7 +39,7 @@ class RecipleaseViewController: UIViewController {
         tableView.reloadData()
     }
     
-    static var cellIdentifier = "RecipleaseCell"
+    static var cellIdentifier = "PresentCell"
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -53,22 +55,37 @@ extension RecipleaseViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return RecipleaseService.shared.recipleases.count
+        return PresentService.shared.presents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RecipleaseViewController.cellIdentifier, for: indexPath)
+        guard  let cell = tableView.dequeueReusableCell(withIdentifier: "PresentCell", for: indexPath) as? PresentTableViewCell else {
+            return UITableViewCell()
+        }
 
-        let reciplease = RecipleaseService.shared.recipleases[indexPath.row]
+        let present = PresentService.shared.presents[indexPath.row]
+        
+     
 
         // Accédez à la propriété "ingr" de Reciplease et affichez-la dans la cellule
-        cell.textLabel?.text = reciplease.ingr
+        cell.textLabel?.text = present.description
 
         return cell
+        
     }
 
 
 
 
+}
+
+
+extension RecipleaseViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            PresentService.shared.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 
