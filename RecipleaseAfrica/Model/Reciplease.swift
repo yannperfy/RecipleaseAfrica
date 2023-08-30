@@ -10,18 +10,21 @@ import Foundation
 struct Reciplease {
  
     let ingr: String
+    let images: RecipeImages
 }
 struct RecipeResponse: Codable {
     let from: Int
     let to: Int
     let count: Int
-    let links: Links
+    let links: Links?// Assurez-vous que la clé "links" est définie ici
     let hits: [RecipeHit]
 }
 
+
+
 struct Links: Codable {
-    let selfLink: Link
-    let next: Link
+    let selfLink: Link?
+    let next: Link?
 }
 
 struct Link: Codable {
@@ -31,7 +34,7 @@ struct Link: Codable {
 
 struct RecipeHit: Codable {
     let recipe: Recipe
-    let links: Links
+    let links: Links?
 }
 
 struct Recipe: Codable {

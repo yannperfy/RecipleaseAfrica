@@ -172,17 +172,19 @@
                                 <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ixm-zJ-HVl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ixm-zJ-HVl">
                                 <rect key="frame" x="10" y="694" width="373" height="65"/>
+                                <color key="backgroundColor" red="0.08269381361" green="0.67111403280000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="Ep5-3N-Frq"/>
                                 </constraints>
-                                <color key="tintColor" red="0.08269381361" green="0.67111403280000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Search For Recipes">
-                                    <color key="baseBackgroundColor" red="0.08269381361" green="0.67111403280000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Search For Recipes">
+                                    <color key="titleColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
+                                    <action selector="recipeSeach:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NYo-Ee-DKn"/>
                                     <segue destination="y87-Ko-d8W" kind="show" id="Xqb-ez-lSQ"/>
                                 </connections>
                             </button>
@@ -242,6 +244,10 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dAv-hS-ais"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="MrJ-bn-Ge3">
+                                <rect key="frame" x="186.66666666666666" y="716.66666666666663" width="20" height="20"/>
+                                <color key="color" red="0.08269381361" green="0.67111403280000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.1144487015" green="0.1144487015" blue="0.1144487015" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -252,18 +258,22 @@
                             <constraint firstItem="joD-dS-0xk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="EmH-4o-eRW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="joD-dS-0xk" secondAttribute="trailing" constant="10" id="KRz-BP-LLK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BPf-OI-EQG" secondAttribute="trailing" constant="10" id="N4a-cE-lZk"/>
+                            <constraint firstItem="MrJ-bn-Ge3" firstAttribute="centerX" secondItem="Ixm-zJ-HVl" secondAttribute="centerX" id="Odh-oD-Zw1"/>
                             <constraint firstItem="bxT-3C-tgR" firstAttribute="top" secondItem="BPf-OI-EQG" secondAttribute="bottom" constant="20" id="TNR-s5-t5p"/>
                             <constraint firstItem="joD-dS-0xk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="hSu-4p-JYd"/>
                             <constraint firstItem="BPf-OI-EQG" firstAttribute="top" secondItem="joD-dS-0xk" secondAttribute="bottom" constant="30" id="j0H-18-Yxp"/>
                             <constraint firstItem="bxT-3C-tgR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="kJi-4C-Hmc"/>
                             <constraint firstItem="Ixm-zJ-HVl" firstAttribute="top" secondItem="bxT-3C-tgR" secondAttribute="bottom" constant="20" id="mcH-Dx-7rg"/>
+                            <constraint firstItem="MrJ-bn-Ge3" firstAttribute="centerY" secondItem="Ixm-zJ-HVl" secondAttribute="centerY" id="mp5-7g-UxA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ixm-zJ-HVl" secondAttribute="trailing" constant="10" id="s57-ce-tlj"/>
                             <constraint firstItem="BPf-OI-EQG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="vpH-te-eeR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Z0l-w9-SYP"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="MrJ-bn-Ge3" id="aNc-WO-II4"/>
                         <outlet property="add" destination="OhJ-Ey-LtW" id="oWk-de-ye7"/>
+                        <outlet property="recipeSeach" destination="Ixm-zJ-HVl" id="dUQ-ho-WMw"/>
                         <outlet property="recipleaseTextField1" destination="sIe-hB-azz" id="Gfl-xa-TUS"/>
                         <outlet property="tableView" destination="bxT-3C-tgR" id="5Ti-LB-BVm"/>
                     </connections>

@@ -11,9 +11,9 @@ class RecipleaseListViewController: UIViewController {
 
     @IBOutlet weak var listTableView: UITableView!
     
+    var recipes: [Recipe] = []
+
     
-    var  strings: [String] = ["Ndolet", "Plantain", "Frites"]
-    var imageFoods: [String] = ["frites", "Alloco", "Ndolet"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,37 +40,23 @@ class RecipleaseListViewController: UIViewController {
 
 extension RecipleaseListViewController: UITableViewDataSource, UITableViewDelegate {
     
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "ingredientsVC")
-        
-        vc.navigationItem.title = strings[indexPath.row]
-        
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return strings.count
+        return recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RecipleaseTableViewCell.identifier, for: indexPath) as! RecipleaseTableViewCell
 
-        if let image = UIImage(named: imageFoods[indexPath.row]) {
-            cell.recipleaseImageView.image = image
-        } else {
-            cell.recipleaseImageView.image = UIImage(systemName: "photo") // Image par défaut en cas de problème de chargement
-        }
+        let recipe = recipes[indexPath.row]
 
-        cell.recipleaseImageView.contentMode = .scaleAspectFill // Assurez-vous que l'image remplit la cellule
-        cell.recipleaseNameLabel.text = strings[indexPath.row]
+        // Mettez à jour la cellule avec les données de la recette
+        cell.recipleaseNameLabel.text = recipe.label
+
+        // Assurez-vous que votre modèle de données Recipe contient une propriété image
+        // pour afficher l'image de la recette dans la cellule (exemple : recipe.image)
 
         return cell
     }
-
-
-    
 }
+
 
