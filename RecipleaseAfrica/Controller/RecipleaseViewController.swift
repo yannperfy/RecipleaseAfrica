@@ -14,9 +14,15 @@ class RecipleaseViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var recipeSeach: UIButton!
-    
-    
+        
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
+    
+    @IBAction func dissmissKeyboard(_ sender: UITapGestureRecognizer) {
+        recipleaseTextField1.resignFirstResponder()
+
+    }
     
     
     @IBAction func add(_ sender: Any) {
@@ -60,14 +66,14 @@ class RecipleaseViewController: UIViewController {
     }
     
     
-    
-    private func presentAlert() {
+      func presentAlert() {
         DispatchQueue.main.async {
             let alertVC = UIAlertController(title: "Error", message: "Could not find a recipe.", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertVC, animated: true, completion: nil)
         }
     }
+  
 
     
     override func viewWillAppear(_ animated: Bool) {
