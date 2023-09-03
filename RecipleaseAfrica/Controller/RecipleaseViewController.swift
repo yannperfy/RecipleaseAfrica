@@ -46,16 +46,15 @@ class RecipleaseViewController: UIViewController {
     }
     
     @IBAction func recipeSeach(_ sender: Any) {
-        
-        guard let searchQuery = recipleaseTextField1.text, !searchQuery.isEmpty else {
+        guard let keyword = recipleaseTextField1.text, !keyword.isEmpty else {
                 return
             }
 
-            PresentService.shared.getRecipe(searchQuery: searchQuery) { (response, error) in
+            PresentService.getRecipes(keyword: keyword) { (recipes, error) in
                 // Gérez la réponse et les erreurs ici
-                if let response = response {
-                    // Traitez la réponse JSON ici (par exemple, affichez-la dans la console)
-                    print(response)
+                if let recipes = recipes {
+                    // Traitez les recettes reçues
+                    print(recipes)
                 } else if let error = error {
                     // Traitez les erreurs ici (par exemple, affichez-les dans la console)
                     print("Error: \(error)")
@@ -83,6 +82,7 @@ class RecipleaseViewController: UIViewController {
     
     static var cellIdentifier = "PresentCell"
     override func viewDidLoad() {
+        recipeSeach.layer.cornerRadius = 20
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
