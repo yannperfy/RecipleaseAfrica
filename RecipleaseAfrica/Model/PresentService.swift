@@ -4,8 +4,6 @@
 //
 //  Created by Yann Perfy on 23/08/2023.
 //
-
-
 import Foundation
 
 class PresentService {
@@ -17,7 +15,8 @@ class PresentService {
 
     static func getRecipes(keyword: String, callback: @escaping ([Recipe]?, Error?) -> Void) {
         let keywords = keyword.split { !$0.isLetter }
-        if keywords.count == 1 {
+        
+        guard keywords.count != 1 else {
             getImage(keyword: keyword) { (success, recipe) in
                 if success, let recipe = recipe {
                     callback([recipe], nil)
@@ -36,51 +35,53 @@ class PresentService {
             // Ajoutez d'autres paramètres si nécessaire
         ]
 
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: requestBody)
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody) else {
+            let error = NSError(domain: "YourErrorDomain", code: 3, userInfo: nil)
+            callback(nil, error)
+            return
+        }
 
-            var request = URLRequest(url: recipleaseUrl)
-            request.httpMethod = "POST"
-            request.httpBody = jsonData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        var request = URLRequest(url: recipleaseUrl)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-            PresentService.cancelDataTask()
+        PresentService.cancelDataTask()
 
-            let session = URLSession(configuration: .default)
+        let session = URLSession(configuration: .default)
 
-            dataTask = session.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    print("Erreur lors de la requête : \(error)")
-                    // Renvoyez l'erreur
-                    callback(nil, error)
-                    return
-                }
-
-                guard let data = data else {
-                    print("Aucune donnée reçue")
-                    // Créez une erreur en cas d'absence de données
-                    let error = NSError(domain: "YourErrorDomain", code: 2, userInfo: nil)
-                    callback(nil, error)
-                    return
-                }
-
-                do {
-                    let decoder = JSONDecoder()
-                    let recipes = try decoder.decode([Recipe].self, from: data)
-                    callback(recipes, nil)
-                } catch {
-                    print("Erreur lors du décodage JSON : \(error)")
-                    // Renvoyez l'erreur de décodage
-                    callback(nil, error)
-                }
+        dataTask = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                print("Erreur lors de la requête : \(error!)")
+                // Renvoyez l'erreur avec le code de statut HTTP de la réponse
+                let httpResponse = response as? HTTPURLResponse
+                let statusCode = httpResponse?.statusCode ?? 500
+                let customError = NSError(domain: "YourErrorDomain", code: statusCode, userInfo: nil)
+                callback(nil, customError)
+                return
             }
 
-            dataTask?.resume()
-        } catch {
-            print("Erreur lors de la création des données JSON : \(error)")
-            // Renvoyez l'erreur de création JSON
-            callback(nil, error)
+            guard let data = data else {
+                print("Aucune donnée reçue")
+                // Créez une erreur en cas d'absence de données
+                let error = NSError(domain: "YourErrorDomain", code: 2, userInfo: nil)
+                callback(nil, error)
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let recipes = try decoder.decode([Recipe].self, from: data)
+                // Renvoyez les données de recette
+                callback(recipes, nil)
+            } catch {
+                print("Erreur lors du décodage JSON : \(error)")
+                // Renvoyez l'erreur de décodage
+                callback(nil, error)
+            }
         }
+
+        dataTask?.resume()
     }
 
     static func getImage(keyword: String, callback: @escaping (Bool, Recipe?) -> Void) {

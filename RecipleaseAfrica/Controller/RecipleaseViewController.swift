@@ -46,26 +46,30 @@ class RecipleaseViewController: UIViewController {
     }
     
     @IBAction func recipeSeach(_ sender: Any) {
+        print("recipeSeach button tapped")
         guard let keyword = recipleaseTextField1.text, !keyword.isEmpty else {
                 return
             }
-
-            PresentService.getRecipes(keyword: keyword) { (recipes, error) in
-                // Gérez la réponse et les erreurs ici
-                if let recipes = recipes {
-                    // Traitez les recettes reçues
-                    print(recipes)
-                } else if let error = error {
-                    // Traitez les erreurs ici (par exemple, affichez-les dans la console)
-                    print("Error: \(error)")
-                    // Affichez l'alerte de présentation en cas d'erreur
-                    self.presentAlert()
-                }
-            }
+        PresentService.getRecipes(keyword: keyword) { (recipes, error) in
+               // Gérez la réponse et les erreurs ici
+               DispatchQueue.main.async {
+                   if let recipes = recipes {
+                       // Traitez les recettes reçues
+                       print(recipes)
+                   } else if let error = error {
+                       // Traitez les erreurs ici (par exemple, affichez-les dans la console)
+                       print("Error: \(error)")
+                       // Affichez l'alerte de présentation en cas d'erreur
+                       self.presentAlert()
+                   }
+               }
+           }
     }
     
     
       func presentAlert() {
+          
+          print("presentAlert() called")
         DispatchQueue.main.async {
             let alertVC = UIAlertController(title: "Error", message: "Could not find a recipe.", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

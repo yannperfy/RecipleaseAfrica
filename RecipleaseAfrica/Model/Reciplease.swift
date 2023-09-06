@@ -65,6 +65,7 @@ struct Recipe: Codable {
     let totalNutrients: [String: Double]
     let totalDaily: [String: Double]
     let digest: [RecipeDigest]
+ 
 }
 
 struct RecipeImages: Codable {
