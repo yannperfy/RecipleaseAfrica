@@ -30,8 +30,11 @@ class PresentService {
         }
 
         let requestBody: [String: Any] = [
+            "type": "public",
             "app_key": "33f90e6e97ed8715c1c0efb964c37524",
             "app_id": "6632c2fb",
+            "q": "reciplease",
+            "Accept-Language": "en"
             // Ajoutez d'autres paramètres si nécessaire
         ]
 

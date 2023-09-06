@@ -14,7 +14,7 @@ class RecipleaseListViewController: UIViewController {
     @IBOutlet weak var listTableView: UITableView!
     
     var recipes: [Recipe] = []
-
+    var loadRecipesClosure: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +99,8 @@ class RecipleaseListViewController: UIViewController {
             // Il y a des données à afficher, rechargez la table
             listTableView.reloadData()
         }
+        // Appeler la closure pour signaler que les données ont été chargées
+          loadRecipesClosure?()
     }
 
 }

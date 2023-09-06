@@ -64,6 +64,7 @@ class RecipleaseViewController: UIViewController {
                    }
                }
            }
+      
     }
     
     
@@ -86,6 +87,19 @@ class RecipleaseViewController: UIViewController {
     
     static var cellIdentifier = "PresentCell"
     override func viewDidLoad() {
+        
+        // Créez une instance de RecipleaseListViewController et configurez la closure loadRecipesClosure
+        let recipleaseListViewController = RecipleaseListViewController()
+
+        recipleaseListViewController.loadRecipesClosure = { [weak recipleaseListViewController] in
+            recipleaseListViewController?.loadRecipes()
+        }
+
+        // Appelez maintenant la fonction loadRecipes()
+        recipleaseListViewController.loadRecipes()
+                
+        
+        
         recipeSeach.layer.cornerRadius = 20
         super.viewDidLoad()
         // Do any additional setup after loading the view.
