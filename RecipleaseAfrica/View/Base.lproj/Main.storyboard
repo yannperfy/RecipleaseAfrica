@@ -184,7 +184,6 @@
                                     <color key="titleColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="recipeSeach:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NYo-Ee-DKn"/>
                                     <action selector="searchRecipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yiM-xd-hUP"/>
                                     <segue destination="y87-Ko-d8W" kind="show" id="Xqb-ez-lSQ"/>
                                 </connections>
@@ -249,6 +248,9 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MrJ-bn-Ge3">
                                 <rect key="frame" x="179" y="708" width="37" height="37"/>
                                 <color key="color" red="0.08269381361" green="0.67111403280000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Z8W-fN-iZT" appends="YES" id="SeK-QY-rd5"/>
+                                </connections>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -276,9 +278,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Z0l-w9-SYP"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="MrJ-bn-Ge3" id="aNc-WO-II4"/>
+                        <outlet property="activityIndicator" destination="MrJ-bn-Ge3" id="5GX-0Q-fW7"/>
                         <outlet property="addRecipeButton" destination="OhJ-Ey-LtW" id="UN9-X7-gtP"/>
-                        <outlet property="recipeSeach" destination="Ixm-zJ-HVl" id="dUQ-ho-WMw"/>
                         <outlet property="recipleaseTextField1" destination="sIe-hB-azz" id="Gfl-xa-TUS"/>
                         <outlet property="searchRecipeButton" destination="Ixm-zJ-HVl" id="9SY-mH-6PE"/>
                         <outlet property="tableView" destination="bxT-3C-tgR" id="5Ti-LB-BVm"/>

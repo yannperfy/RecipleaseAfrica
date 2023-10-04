@@ -85,6 +85,7 @@ class RecipleaseViewController: UIViewController {
                        // Traitez les erreurs ici (par exemple, affichez-les dans la console)
                        print("Error: \(error)")
                        // Affichez l'alerte de présentation en cas d'erreur
+
                        self.presentAlert()
                    }
                }
@@ -119,7 +120,6 @@ class RecipleaseViewController: UIViewController {
 
 
 }
-
 
 extension RecipleaseViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
