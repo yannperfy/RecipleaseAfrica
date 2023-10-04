@@ -55,7 +55,7 @@ class PresentService {
 
         dataTask = session.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
-                print("Erreur lors de la requête : \(error!)")
+                print("Erreur lor   s de la requête : \(error!)")
                 // Renvoyez l'erreur avec le code de statut HTTP de la réponse
                 let httpResponse = response as? HTTPURLResponse
                 let statusCode = httpResponse?.statusCode ?? 500

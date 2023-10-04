@@ -185,6 +185,7 @@
                                 </state>
                                 <connections>
                                     <action selector="recipeSeach:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NYo-Ee-DKn"/>
+                                    <action selector="searchRecipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yiM-xd-hUP"/>
                                     <segue destination="y87-Ko-d8W" kind="show" id="Xqb-ez-lSQ"/>
                                 </connections>
                             </button>
@@ -205,7 +206,7 @@
                                             <color key="baseBackgroundColor" red="0.08269381361" green="0.67111403280000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="add:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5la-y8-13x"/>
+                                            <action selector="addRecipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yFL-XP-c0R"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -276,9 +277,10 @@
                     <navigationItem key="navigationItem" id="Z0l-w9-SYP"/>
                     <connections>
                         <outlet property="activityIndicator" destination="MrJ-bn-Ge3" id="aNc-WO-II4"/>
-                        <outlet property="add" destination="OhJ-Ey-LtW" id="oWk-de-ye7"/>
+                        <outlet property="addRecipeButton" destination="OhJ-Ey-LtW" id="UN9-X7-gtP"/>
                         <outlet property="recipeSeach" destination="Ixm-zJ-HVl" id="dUQ-ho-WMw"/>
                         <outlet property="recipleaseTextField1" destination="sIe-hB-azz" id="Gfl-xa-TUS"/>
+                        <outlet property="searchRecipeButton" destination="Ixm-zJ-HVl" id="9SY-mH-6PE"/>
                         <outlet property="tableView" destination="bxT-3C-tgR" id="5Ti-LB-BVm"/>
                     </connections>
                 </viewController>

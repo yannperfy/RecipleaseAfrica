@@ -9,24 +9,49 @@ import UIKit
 
 class RecipleaseViewController: UIViewController {
     @IBOutlet weak var recipleaseTextField1: UITextField!
-    
-    @IBOutlet weak var add: UIButton!
+
+    @IBOutlet weak var addRecipeButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var recipeSeach: UIButton!
-        
+
+    @IBOutlet weak var searchRecipeButton: UIButton!
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    
-    
+
+    override func viewDidLoad() {
+           super.viewDidLoad()
+           configureUI()
+        // Créez une instance de RecipleaseListViewController et configurez la closure loadRecipesClosure
+               let recipleaseListViewController = RecipleaseListViewController()
+               recipleaseListViewController.loadRecipesClosure = { [weak recipleaseListViewController] in
+                   recipleaseListViewController?.loadRecipes()
+               }
+
+               // Appelez maintenant la fonction loadRecipes()
+               recipleaseListViewController.loadRecipes()
+       }
+
+    private func configureUI() {
+           // Configurez l'apparence des boutons
+           addRecipeButton.layer.cornerRadius = 20
+           searchRecipeButton.layer.cornerRadius = 20
+
+           // Configurez la table view
+           tableView.dataSource = self
+           tableView.delegate = self
+           tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PresentCell")
+
+           // Cachez l'indicateur d'activité au départ
+           activityIndicator.isHidden = true
+       }
+    // Méthode pour masquer le clavier
     @IBAction func dissmissKeyboard(_ sender: UITapGestureRecognizer) {
         recipleaseTextField1.resignFirstResponder()
 
     }
     
     
-    @IBAction func add(_ sender: Any) {
-        
+    @IBAction func addRecipe(_ sender: Any) {
+
         guard let recipeName = recipleaseTextField1.text, !recipeName.isEmpty else {
                return
            }
@@ -38,14 +63,14 @@ class RecipleaseViewController: UIViewController {
 
            PresentService.shared.add(present: reciplease)
 
-           tableView.reloadData()
+//           tableView.reloadData()
     }
     private func toggleActivityIndicator(shown: Bool) {
         activityIndicator.isHidden = !shown
-        recipeSeach.isHidden = shown
+        searchRecipeButton.isHidden = shown
     }
-    
-    @IBAction func recipeSeach(_ sender: Any) {
+//
+    @IBAction func searchRecipe(_ sender: Any) {
         print("recipeSeach button tapped")
         guard let keyword = recipleaseTextField1.text, !keyword.isEmpty else {
                 return
@@ -64,7 +89,7 @@ class RecipleaseViewController: UIViewController {
                    }
                }
            }
-      
+
     }
     
     
@@ -83,27 +108,14 @@ class RecipleaseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        
+        
+
     }
     
+    
     static var cellIdentifier = "PresentCell"
-    override func viewDidLoad() {
-        
-        // Créez une instance de RecipleaseListViewController et configurez la closure loadRecipesClosure
-        let recipleaseListViewController = RecipleaseListViewController()
-
-        recipleaseListViewController.loadRecipesClosure = { [weak recipleaseListViewController] in
-            recipleaseListViewController?.loadRecipes()
-        }
-
-        // Appelez maintenant la fonction loadRecipes()
-        recipleaseListViewController.loadRecipes()
-                
-        
-        
-        recipeSeach.layer.cornerRadius = 20
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
+  
 
 
 }
