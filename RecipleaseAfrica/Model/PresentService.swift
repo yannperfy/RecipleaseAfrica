@@ -12,10 +12,10 @@ class PresentService {
     private init() {}
 
     private static var dataTask: URLSessionDataTask?
-
-    static func getRecipes(keyword: String, callback: @escaping ([Recipe]?, Error?) -> Void) {
+    
+    static func getRecipes(keyword: String, callback: @escaping ([Reciplease]?, Error?) -> Void) {
         let keywords = keyword.split { !$0.isLetter }
-        
+
         guard keywords.count != 1 else {
             getImage(keyword: keyword) { (success, recipe) in
                 if success, let recipe = recipe {
@@ -33,8 +33,11 @@ class PresentService {
             "type": "public",
             "app_key": "33f90e6e97ed8715c1c0efb964c37524",
             "app_id": "6632c2fb",
-            "q": "reciplease",
-            "Accept-Language": "en"
+            "q": "",
+            "Accept-Language": "en",
+            "beta": true,
+            "ingr": "1-2",
+            "imageSize": "REGULAR"
             // Ajoutez d'autres paramètres si nécessaire
         ]
 
@@ -55,7 +58,7 @@ class PresentService {
 
         dataTask = session.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
-                print("Erreur lor   s de la requête : \(error!)")
+                print("Erreur lors de la requête : \(error!)")
                 // Renvoyez l'erreur avec le code de statut HTTP de la réponse
                 let httpResponse = response as? HTTPURLResponse
                 let statusCode = httpResponse?.statusCode ?? 500
@@ -71,23 +74,38 @@ class PresentService {
                 callback(nil, error)
                 return
             }
+        
+
 
             do {
+                // Affichez la réponse JSON brute dans la console
+                let jsonString = String(data: data, encoding: .utf8) ?? "Response data is not a valid UTF-8 string"
+                print("Raw JSON response:\n\(jsonString)")
+                
                 let decoder = JSONDecoder()
-                let recipes = try decoder.decode([Recipe].self, from: data)
+                let response = try decoder.decode(RecipeResponse.self, from: data)
+                // Le reste de votre code pour décoder la réponse...
+                
+                // Extrait les recettes du tableau "hits" de la réponse
+                let recipes = response.hits.map { $0.recipe }
                 // Renvoyez les données de recette
-                callback(recipes, nil)
+                let recipleaseRecipes = recipes.map { recipe in
+                    return Reciplease(ingr: recipe.label, uri: recipe.uri, label: recipe.label, image: recipe.image, images: recipe.images, source: recipe.source, url: recipe.url, shareAs: recipe.shareAs, yield: recipe.yield, dietLabels: recipe.dietLabels, healthLabels: recipe.healthLabels, cautions: recipe.cautions, ingredientLines: recipe.ingredientLines, ingredients: recipe.ingredients, calories: recipe.calories, glycemicIndex: recipe.glycemicIndex, totalCO2Emissions: recipe.totalCO2Emissions, co2EmissionsClass: recipe.co2EmissionsClass, totalWeight: recipe.totalWeight, cuisineType: recipe.cuisineType, mealType: recipe.mealType, dishType: recipe.dishType, instructions: recipe.instructions, tags: recipe.tags, externalId: recipe.externalId, totalNutrients: recipe.totalNutrients, totalDaily: recipe.totalDaily, digest: recipe.digest)
+                }
+                callback(recipleaseRecipes, nil)
             } catch {
                 print("Erreur lors du décodage JSON : \(error)")
                 // Renvoyez l'erreur de décodage
                 callback(nil, error)
             }
+
         }
 
         dataTask?.resume()
     }
 
-    static func getImage(keyword: String, callback: @escaping (Bool, Recipe?) -> Void) {
+
+    static func getImage(keyword: String, callback: @escaping (Bool, Reciplease?) -> Void) {
         // Implémentez la logique pour obtenir une image avec le mot clé ici
         // ...
     }
@@ -106,3 +124,4 @@ class PresentService {
         presents.remove(at: index)
     }
 }
+

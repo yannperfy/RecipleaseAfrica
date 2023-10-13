@@ -10,7 +10,36 @@ import Foundation
 struct Reciplease {
  
     let ingr: String
+    
+    
+    let uri: String
+    let label: String
+    let image: String
     let images: RecipeImages
+    let source: String
+    let url: String
+    let shareAs: String
+    let yield: Int
+    let dietLabels: [String]
+    let healthLabels: [String]
+    let cautions: [String]
+    let ingredientLines: [String]
+    let ingredients: [RecipeIngredient]
+    let calories: Double
+    let glycemicIndex: Double
+    let totalCO2Emissions: Double
+    let co2EmissionsClass: String
+    let totalWeight: Double
+    let cuisineType: [String]
+    let mealType: [String]
+    let dishType: [String]
+    let instructions: [String]
+    let tags: [String]
+    let externalId: String
+    let totalNutrients: [String: Double]
+    let totalDaily: [String: Double]
+    let digest: [RecipeDigest]
+ 
 }
 struct RecipeResponse: Codable {
     let from: Int
