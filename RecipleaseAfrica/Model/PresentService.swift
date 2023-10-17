@@ -1,10 +1,23 @@
-//
-//  RecipleaseService.swift
-//  RecipleaseAfrica
-//
-//  Created by Yann Perfy on 23/08/2023.
-//
 import Foundation
+
+// Définissez la structure RecipeRequestData pour la requête JSON
+struct RecipeRequestData: Codable {
+    let type: String
+    let app_key: String
+    let app_id: String
+    let q: String
+    let beta: Bool
+    let ingr: String
+    let imageSize: String
+    // Ajoutez d'autres propriétés si nécessaire
+}
+
+enum PresentServiceError: Error {
+    case unauthorized
+    case missingData
+    case decodingError
+    // Ajoutez d'autres cas d'erreur si nécessaire
+}
 
 class PresentService {
     static let recipleaseUrl = URL(string: "https://api.edamam.com/api/recipes/v2")!
@@ -12,8 +25,8 @@ class PresentService {
     private init() {}
 
     private static var dataTask: URLSessionDataTask?
-    
-    static func getRecipes(keyword: String, callback: @escaping ([Reciplease]?, Error?) -> Void) {
+
+    static func getRecipes(keyword: String, callback: @escaping ([Recipe]?, Error?) -> Void) {
         let keywords = keyword.split { !$0.isLetter }
 
         guard keywords.count != 1 else {
@@ -22,91 +35,102 @@ class PresentService {
                     callback([recipe], nil)
                 } else {
                     // Créez une erreur en cas d'échec
-                    let error = NSError(domain: "YourErrorDomain", code: 1, userInfo: nil)
+                    let error = PresentServiceError.unauthorized
                     callback(nil, error)
                 }
             }
             return
         }
 
-        let requestBody: [String: Any] = [
-            "type": "public",
-            "app_key": "33f90e6e97ed8715c1c0efb964c37524",
-            "app_id": "6632c2fb",
-            "q": "",
-            "Accept-Language": "en",
-            "beta": true,
-            "ingr": "1-2",
-            "imageSize": "REGULAR"
+        // Utilisez la structure RecipeRequestData pour construire votre requête JSON
+        let requestData = RecipeRequestData(
+            type: "public",
+            app_key: "33f90e6e97ed8715c1c0efb964c37524",
+            app_id: "6632c2fb",
+            q: keyword,
+            beta: true,
+            ingr: keyword, // Utilisation du mot-clé pour ingr
+            imageSize: "REGULAR"
             // Ajoutez d'autres paramètres si nécessaire
-        ]
+        )
 
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody) else {
-            let error = NSError(domain: "YourErrorDomain", code: 3, userInfo: nil)
-            callback(nil, error)
-            return
-        }
+        do {
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(requestData)
 
-        var request = URLRequest(url: recipleaseUrl)
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            var request = URLRequest(url: recipleaseUrl)
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        PresentService.cancelDataTask()
+            PresentService.cancelDataTask()
 
-        let session = URLSession(configuration: .default)
+            let session = URLSession(configuration: .default)
 
-        dataTask = session.dataTask(with: request) { (data, response, error) in
-            guard error == nil else {
-                print("Erreur lors de la requête : \(error!)")
-                // Renvoyez l'erreur avec le code de statut HTTP de la réponse
-                let httpResponse = response as? HTTPURLResponse
-                let statusCode = httpResponse?.statusCode ?? 500
-                let customError = NSError(domain: "YourErrorDomain", code: statusCode, userInfo: nil)
-                callback(nil, customError)
-                return
-            }
-
-            guard let data = data else {
-                print("Aucune donnée reçue")
-                // Créez une erreur en cas d'absence de données
-                let error = NSError(domain: "YourErrorDomain", code: 2, userInfo: nil)
-                callback(nil, error)
-                return
-            }
-        
-
-
-            do {
-                // Affichez la réponse JSON brute dans la console
-                let jsonString = String(data: data, encoding: .utf8) ?? "Response data is not a valid UTF-8 string"
-                print("Raw JSON response:\n\(jsonString)")
-                
-                let decoder = JSONDecoder()
-                let response = try decoder.decode(RecipeResponse.self, from: data)
-                // Le reste de votre code pour décoder la réponse...
-                
-                // Extrait les recettes du tableau "hits" de la réponse
-                let recipes = response.hits.map { $0.recipe }
-                // Renvoyez les données de recette
-                let recipleaseRecipes = recipes.map { recipe in
-                    return Reciplease(ingr: recipe.label, uri: recipe.uri, label: recipe.label, image: recipe.image, images: recipe.images, source: recipe.source, url: recipe.url, shareAs: recipe.shareAs, yield: recipe.yield, dietLabels: recipe.dietLabels, healthLabels: recipe.healthLabels, cautions: recipe.cautions, ingredientLines: recipe.ingredientLines, ingredients: recipe.ingredients, calories: recipe.calories, glycemicIndex: recipe.glycemicIndex, totalCO2Emissions: recipe.totalCO2Emissions, co2EmissionsClass: recipe.co2EmissionsClass, totalWeight: recipe.totalWeight, cuisineType: recipe.cuisineType, mealType: recipe.mealType, dishType: recipe.dishType, instructions: recipe.instructions, tags: recipe.tags, externalId: recipe.externalId, totalNutrients: recipe.totalNutrients, totalDaily: recipe.totalDaily, digest: recipe.digest)
+            dataTask = session.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    // Renvoyez l'erreur avec le code de statut HTTP de la réponse
+                    let httpResponse = response as? HTTPURLResponse
+                    let statusCode = httpResponse?.statusCode ?? 500
+                    let customError = PresentServiceError.unauthorized
+                    callback(nil, customError)
+                    return
                 }
-                callback(recipleaseRecipes, nil)
-            } catch {
-                print("Erreur lors du décodage JSON : \(error)")
-                // Renvoyez l'erreur de décodage
-                callback(nil, error)
+
+                guard let data = data else {
+                    // Créez une erreur en cas d'absence de données
+                    let error = PresentServiceError.missingData
+                    callback(nil, error)
+                    return
+                }
+
+                do {
+                    let decoder = JSONDecoder()
+                    let welcome = try decoder.decode(Welcome.self, from: data)
+                    let recipes = welcome.hits.map { $0.recipe }
+
+                    // Convertissez les données en instances de la structure Recipe
+                    let recipleaseRecipes = recipes.map { recipe in
+                        return Recipe(
+                            uri: recipe.uri,
+                            label: recipe.label,
+                            image: recipe.image,
+                            images: recipe.images,
+                            source: recipe.source,
+                            url: recipe.url,
+                            shareAs: recipe.shareAs,
+                            yield: recipe.yield,
+                            dietLabels: recipe.dietLabels,
+                            healthLabels: recipe.healthLabels,
+                            cautions: recipe.cautions,
+                            ingredientLines: recipe.ingredientLines,
+                            ingredients: recipe.ingredients,
+                            calories: recipe.calories,
+                            totalCO2Emissions: recipe.totalCO2Emissions,
+                            co2EmissionsClass: recipe.co2EmissionsClass,
+                            totalWeight: recipe.totalWeight,
+                            totalTime: recipe.totalTime ?? 0, // Ajoutez une valeur par défaut pour totalTime
+                            cuisineType: recipe.cuisineType,
+                            mealType: recipe.mealType,
+                            dishType: recipe.dishType,
+                            totalNutrients: recipe.totalNutrients,
+                            totalDaily: recipe.totalDaily,
+                            digest: recipe.digest
+                        )
+                    }
+                    callback(recipleaseRecipes, nil)
+                } catch {
+                    callback(nil, PresentServiceError.decodingError)
+                }
             }
-
+            dataTask?.resume()
+        } catch {
+            callback(nil, PresentServiceError.missingData)
         }
-
-        dataTask?.resume()
     }
 
-
-    static func getImage(keyword: String, callback: @escaping (Bool, Reciplease?) -> Void) {
-        // Implémentez la logique pour obtenir une image avec le mot clé ici
+    static func getImage(keyword: String, callback: @escaping (Bool, Recipe?) -> Void) {
+        // Implémentez la logique pour obtenir une image avec le mot-clé ici
         // ...
     }
 
@@ -124,4 +148,3 @@ class PresentService {
         presents.remove(at: index)
     }
 }
-

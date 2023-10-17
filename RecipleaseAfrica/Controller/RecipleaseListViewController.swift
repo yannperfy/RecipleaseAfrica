@@ -14,7 +14,7 @@ class RecipleaseListViewController: UIViewController {
 
     @IBOutlet weak var listTableView: UITableView!
     
-    var recipes: [Reciplease] = []
+    var recipes: [Recipe] = []
     var loadRecipesClosure: (() -> Void)?
     
     

@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipleaseViewController: UIViewController {
-    @IBOutlet weak var recipleaseTextField1: UITextField!
+    @IBOutlet weak var recipleaseTextField: UITextField!
 
     @IBOutlet weak var addRecipeButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -19,7 +19,7 @@ class RecipleaseViewController: UIViewController {
 
     override func viewDidLoad() {
            super.viewDidLoad()
-          
+        configureUI()
        }
 
     private func configureUI() {
@@ -37,47 +37,44 @@ class RecipleaseViewController: UIViewController {
        }
     // Méthode pour masquer le clavier
     @IBAction func dissmissKeyboard(_ sender: UITapGestureRecognizer) {
-        recipleaseTextField1.resignFirstResponder()
+        recipleaseTextField.resignFirstResponder()
 
     }
     
     
     @IBAction func addRecipe(_ sender: Any) {
 
-        guard let recipeName = recipleaseTextField1.text, !recipeName.isEmpty else {
+        guard let recipeName = recipleaseTextField.text, !recipeName.isEmpty else {
                return
            }
 
            // Utilisez recipeName pour créer une nouvelle instance de Reciplease
-           let images = RecipeImages(thumbnail: RecipeImage(url: "thumbnail_url", width: 100, height: 100), small: RecipeImage(url: "small_url", width: 200, height: 200), regular: RecipeImage(url: "regular_url", width: 400, height: 400), large: RecipeImage(url: "large_url", width: 800, height: 800))
+           let images = Images(thumbnail: Large(url: "thumbnail_url", width: 100, height: 100), small: Large(url: "small_url", width: 200, height: 200), regular: Large(url: "regular_url", width: 400, height: 400), large: Large(url: "large_url", width: 800, height: 800))
 
-        let reciplease = Reciplease(ingr: recipeName,
-                                    uri: "",
-                                    label: "",
-                                    image: "", images: images,
-                                    source: "",
-                                    url: "",
-                                    shareAs: "",
-                                    yield: 0,
-                                    dietLabels: [],
-                                    healthLabels: [],
-                                    cautions: [],
-                                    ingredientLines: [],
-                                    ingredients: [],
-                                    calories: 0.0,
-                                    glycemicIndex: 0.0,
-                                    totalCO2Emissions: 0.0,
-                                    co2EmissionsClass: "",
-                                    totalWeight: 0.0,
-                                    cuisineType: [],
-                                    mealType: [],
-                                    dishType: [],
-                                    instructions: [],
-                                    tags: [],
-                                    externalId: "",
-                                    totalNutrients: [:],
-                                    totalDaily: [:],
-                                    digest: [])
+        let reciplease = Recipe(uri: "",
+                                label: recipeName,
+                                image: "",
+                                images: images,
+                                source: "",
+                                url: "",
+                                shareAs: "",
+                                yield: 0,
+                                dietLabels: [],
+                                healthLabels: [],
+                                cautions: [],
+                                ingredientLines: [],
+                                ingredients: [],
+                                calories: 0.0,
+                                totalCO2Emissions: 0.0,
+                                co2EmissionsClass: "",
+                                totalWeight: 0.0,
+                                totalTime: 0,
+                                cuisineType: [],
+                                mealType: [],
+                                dishType: [],
+                                totalNutrients: [:],
+                                totalDaily: [:],
+                                digest: [])
 
         PresentService.shared.add(present: reciplease)
         tableView.reloadData()
@@ -89,7 +86,7 @@ class RecipleaseViewController: UIViewController {
 //
     @IBAction func searchRecipe(_ sender: Any) {
         print("recipeSeach button tapped")
-        guard let keyword = recipleaseTextField1.text, !keyword.isEmpty else {
+        guard let keyword = recipleaseTextField.text, !keyword.isEmpty else {
                 return
             }
         PresentService.getRecipes(keyword: keyword) { (recipes, error) in
@@ -131,8 +128,7 @@ class RecipleaseViewController: UIViewController {
 
     }
     
-    
-    static var cellIdentifier = "PresentCell"
+  
   
 
 
