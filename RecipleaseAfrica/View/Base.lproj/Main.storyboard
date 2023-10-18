@@ -281,7 +281,6 @@
                         <outlet property="activityIndicator" destination="MrJ-bn-Ge3" id="5GX-0Q-fW7"/>
                         <outlet property="addRecipeButton" destination="OhJ-Ey-LtW" id="UN9-X7-gtP"/>
                         <outlet property="recipleaseTextField" destination="sIe-hB-azz" id="ukv-Ky-kiO"/>
-                        <outlet property="recipleaseTextField1" destination="sIe-hB-azz" id="Gfl-xa-TUS"/>
                         <outlet property="searchRecipeButton" destination="Ixm-zJ-HVl" id="9SY-mH-6PE"/>
                         <outlet property="tableView" destination="bxT-3C-tgR" id="5Ti-LB-BVm"/>
                     </connections>

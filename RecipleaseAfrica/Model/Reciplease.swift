@@ -202,7 +202,7 @@ struct Total: Codable {
 
 // MARK: - WelcomeLinks
 struct WelcomeLinks: Codable {
-    let next: Next
+    let next: Next?
 }
 
 
