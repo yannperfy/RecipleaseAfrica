@@ -108,6 +108,7 @@ class RecipleaseViewController: UIViewController {
     }
     
     
+    
       func presentAlert() {
           
           print("presentAlert() called")
@@ -154,6 +155,9 @@ extension RecipleaseViewController: UITableViewDataSource {
 
         // Accédez à la propriété "ingr" de Reciplease et affichez-la dans la cellule
         cell.textLabel?.text = present.description
+        
+       
+
 
         return cell
         

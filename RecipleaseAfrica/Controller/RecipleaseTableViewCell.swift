@@ -13,7 +13,8 @@ class RecipleaseTableViewCell: UITableViewCell {
     @IBOutlet weak var recipleaseNameLabel: UILabel!
     
     @IBOutlet weak var recipleaseIngredientsLabel: UILabel!
-    
+    @IBOutlet weak var caloriesLabel: UILabel!
+    @IBOutlet weak var ingredientsLabel: UILabel!
     static let identifier = "RecipleaseTableViewCell"
     
     static func nib() -> UINib {
@@ -25,6 +26,9 @@ class RecipleaseTableViewCell: UITableViewCell {
         // Initialization code
         
         selectionStyle = .none
+        recipleaseImageView.layer.cornerRadius = 20
+        recipleaseNameLabel.layer.cornerRadius = 10
+        recipleaseIngredientsLabel.layer.cornerRadius = 10
         
         
     }

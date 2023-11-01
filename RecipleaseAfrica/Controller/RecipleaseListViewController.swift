@@ -74,8 +74,7 @@ class RecipleaseListViewController: UIViewController {
 extension RecipleaseListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+        return 1    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipes.count
@@ -84,10 +83,13 @@ extension RecipleaseListViewController: UITableViewDataSource, UITableViewDelega
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: RecipleaseTableViewCell.identifier, for: indexPath) as! RecipleaseTableViewCell
 
+            
             let recipe = recipes[indexPath.row]
-
             // Affichez le nom de la recette
             cell.recipleaseNameLabel.text = recipe.label
+            cell.recipleaseIngredientsLabel.text = recipe.cuisineType.joined(separator: ", ")
+
+            
 
             // Affichez l'image de la recette
             if let imageURL = URL(string: recipe.image), let imageData = try? Data(contentsOf: imageURL), let image = UIImage(data: imageData) {

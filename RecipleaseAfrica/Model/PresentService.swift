@@ -22,6 +22,8 @@ enum PresentServiceError: Error {
     // Ajoutez d'autres cas d'erreur au besoin
 }
 
+import Foundation
+
 class PresentService {
     static let recipleaseUrl = URL(string: "https://api.edamam.com/api/recipes/v2")!
     static let shared = PresentService()
@@ -115,6 +117,7 @@ class PresentService {
         }
         dataTask?.resume()
     }
+
     static func getImage(keyword: String, callback: @escaping (Bool, Recipe?) -> Void) {
         guard let imageUrl = URL(string: "https://api.edamam.com/api/recipes/v2") else {
             callback(false, nil)
@@ -131,9 +134,15 @@ class PresentService {
                 return
             }
 
-            if let data = data, let image = UIImage(data: data) {
+            if let data = data {
                 // Créez votre objet Recipe et appelez le callback
-                // callback(true, recipe)
+                do {
+                    let recipe = try JSONDecoder().decode(Recipe.self, from: data)
+                    callback(true, recipe)
+                } catch let decodingError {
+                    print("Decoding Error: \(decodingError)")
+                    callback(false, nil)
+                }
             } else {
                 callback(false, nil)
             }

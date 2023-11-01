@@ -3,56 +3,85 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="103" id="KGk-i7-Jjw" customClass="RecipleaseTableViewCell" customModule="RecipleaseAfrica" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="433" height="103"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="433" height="103"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipleaseTableViewCell" rowHeight="384" id="jAJ-yu-DFE" customClass="RecipleaseTableViewCell" customModule="RecipleaseAfrica" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1147" height="384"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jAJ-yu-DFE" id="7Sb-ur-Zvo">
+                <rect key="frame" x="0.0" y="0.0" width="1147" height="384"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1r9-zb-Fd8" userLabel="recipeImageView">
-                        <rect key="frame" x="0.0" y="0.0" width="433" height="103"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ks4-yg-O7d" userLabel="recipleaseImageView">
+                        <rect key="frame" x="5" y="5" width="1137" height="179"/>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8oU-ZC-90n">
-                        <rect key="frame" x="10" y="52.333333333333343" width="41.333333333333336" height="40.666666666666657"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ul-Xz-cXk">
-                                <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1p-HK-JVt">
-                                <rect key="frame" x="0.0" y="20.333333333333336" width="41.333333333333336" height="20.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-T1-YVt" userLabel="recipleaseNameLabel">
+                        <rect key="frame" x="25" y="189" width="1097" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="rXT-wZ-t5I"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nR4-QA-AkU" userLabel="recipleaseIngredientsLabel">
+                        <rect key="frame" x="25" y="234" width="1097" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="4QE-pm-xD7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3i-So-lx7" userLabel="calories">
+                        <rect key="frame" x="5" y="279" width="1137" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="qnO-gt-PRs"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYg-ke-hnw">
+                        <rect key="frame" x="5" y="324" width="1137" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="LhH-gr-uGm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="1r9-zb-Fd8" secondAttribute="bottom" id="6BS-y0-rDe"/>
-                    <constraint firstItem="1r9-zb-Fd8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8cx-bq-MW6"/>
-                    <constraint firstItem="8oU-ZC-90n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="CDH-rN-Akl"/>
-                    <constraint firstAttribute="bottom" secondItem="8oU-ZC-90n" secondAttribute="bottom" constant="10" id="HTH-fa-s8K"/>
-                    <constraint firstAttribute="trailing" secondItem="1r9-zb-Fd8" secondAttribute="trailing" id="ZlN-T4-kDT"/>
-                    <constraint firstItem="1r9-zb-Fd8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gEv-IJ-Fb0"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="nR4-QA-AkU" secondAttribute="trailing" constant="5" id="C2m-3X-Mxf"/>
+                    <constraint firstItem="F3a-T1-YVt" firstAttribute="top" secondItem="ks4-yg-O7d" secondAttribute="bottom" constant="5" id="Hxq-Eh-ezA"/>
+                    <constraint firstItem="nR4-QA-AkU" firstAttribute="top" secondItem="F3a-T1-YVt" secondAttribute="bottom" constant="5" id="LLE-oi-Mzx"/>
+                    <constraint firstItem="ks4-yg-O7d" firstAttribute="top" secondItem="7Sb-ur-Zvo" secondAttribute="top" constant="5" id="O0q-SH-NJw"/>
+                    <constraint firstItem="AYg-ke-hnw" firstAttribute="leading" secondItem="7Sb-ur-Zvo" secondAttribute="leading" constant="5" id="OoL-Na-VRi"/>
+                    <constraint firstAttribute="trailing" secondItem="r3i-So-lx7" secondAttribute="trailing" constant="5" id="Pvr-DY-XOT"/>
+                    <constraint firstItem="nR4-QA-AkU" firstAttribute="leading" secondItem="7Sb-ur-Zvo" secondAttribute="leadingMargin" constant="5" id="QCd-SP-FmJ"/>
+                    <constraint firstItem="r3i-So-lx7" firstAttribute="leading" secondItem="7Sb-ur-Zvo" secondAttribute="leading" constant="5" id="TpM-aV-Dmb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="F3a-T1-YVt" secondAttribute="trailing" constant="5" id="eJ9-ad-2nv"/>
+                    <constraint firstAttribute="bottom" secondItem="ks4-yg-O7d" secondAttribute="bottom" constant="200" id="gQN-7M-v7p"/>
+                    <constraint firstItem="ks4-yg-O7d" firstAttribute="leading" secondItem="7Sb-ur-Zvo" secondAttribute="leading" constant="5" id="hVM-aD-bLv"/>
+                    <constraint firstItem="F3a-T1-YVt" firstAttribute="leading" secondItem="7Sb-ur-Zvo" secondAttribute="leadingMargin" constant="5" id="hqh-YD-jrj"/>
+                    <constraint firstAttribute="trailing" secondItem="ks4-yg-O7d" secondAttribute="trailing" constant="5" id="i9J-gz-QEA"/>
+                    <constraint firstAttribute="trailing" secondItem="AYg-ke-hnw" secondAttribute="trailing" constant="5" id="jxl-Gv-Zfz"/>
+                    <constraint firstItem="r3i-So-lx7" firstAttribute="top" secondItem="nR4-QA-AkU" secondAttribute="bottom" constant="5" id="kpS-Zz-thO"/>
+                    <constraint firstItem="AYg-ke-hnw" firstAttribute="top" secondItem="r3i-So-lx7" secondAttribute="bottom" constant="5" id="rPz-e0-rMu"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="recipleaseImageView" destination="1r9-zb-Fd8" id="flf-M8-w1w"/>
-                <outlet property="recipleaseIngredientsLabel" destination="C1p-HK-JVt" id="E7Y-nU-cLh"/>
-                <outlet property="recipleaseNameLabel" destination="9Ul-Xz-cXk" id="ihx-Wg-MdU"/>
+                <outlet property="caloriesLabel" destination="r3i-So-lx7" id="MaF-Cv-Y7d"/>
+                <outlet property="ingredientsLabel" destination="AYg-ke-hnw" id="HOH-vx-p5L"/>
+                <outlet property="recipleaseImageView" destination="ks4-yg-O7d" id="DfQ-CE-rnS"/>
+                <outlet property="recipleaseIngredientsLabel" destination="nR4-QA-AkU" id="MCe-oU-RpG"/>
+                <outlet property="recipleaseNameLabel" destination="F3a-T1-YVt" id="Ssp-9e-PnS"/>
             </connections>
-            <point key="canvasLocation" x="147.32824427480915" y="41.197183098591552"/>
+            <point key="canvasLocation" x="-400.76335877862596" y="-164.08450704225353"/>
         </tableViewCell>
     </objects>
 </document>
